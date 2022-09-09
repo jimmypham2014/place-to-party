@@ -46,6 +46,17 @@ app.use(routes); // Connect all the routes
 
 // backend/app.js
 // ...
+// Catch unhandled requests and forward to error handler.
+// backend/app.js
+
+app.use((_req, _res, next) =>{
+  const err = new Error("The requested resource couldn't be found.");
+  err.title = "Resource not found";
+  err.errors = ["The requested resource couldn't be found."];
+  err.status = 404;
+  next(err)
+});
+// ...
 
 const port = process.env.PORT || 8000
 
